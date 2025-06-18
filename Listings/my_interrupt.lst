@@ -1,0 +1,59 @@
+C51 COMPILER V9.54   MY_INTERRUPT                                                          06/16/2025 19:41:32 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MY_INTERRUPT
+OBJECT MODULE PLACED IN .\Objects\my_interrupt.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE my_interrupt.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\my_interrupt.lst) OBJECT(.\Objects\my_interrupt.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "my_interrupt.h"
+   3          
+   4          void Interrupt_Init(void) {
+   5   1              
+   6   1              // ===== 定时器 T0 配置 =====
+   7   1              TMOD &= 0xF0;           //设置定时器模式
+   8   1              TMOD |= 0x01;           //设置定时器模式
+   9   1              TL0 = 0x00;             //设置定时初值
+  10   1              TH0 = 0xB8;             //设置定时初值
+  11   1              TF0 = 0;                //清除TF0标志
+  12   1              TR0 = 1;                //定时器0开始计时
+  13   1              ET0 = 1;
+  14   1              
+  15   1          // ===== 定时器 T2 配置 =====
+  16   1              T2MOD = 0;              //初始化模式寄存器
+  17   1              T2CON = 0;              //初始化控制寄存器
+  18   1              TL2 = 0x8F;             //设置定时初值
+  19   1              TH2 = 0xFE;             //设置定时初值
+  20   1              RCAP2L = 0x8F;          //设置定时重载值
+  21   1              RCAP2H = 0xFE;          //设置定时重载值
+  22   1              TR2 = 0;                //定时器2不开始计时
+  23   1              
+  24   1          ET2 = 1;            // 允许T2中断   
+  25   1          // ===== 外部中断 INT1 配置（下降沿触发）=====
+  26   1          IT1 = 1;            // 设置 INT1 为下降沿触发
+  27   1          EX1 = 1;            // 允许外部中断 INT1
+  28   1      
+  29   1          // ===== 中断优先级配置 =====
+  30   1          PT2 = 1;            // 定时器2设为高优先级
+  31   1              PT0 = 0;                        // 定时器0设为普通优先级
+  32   1          PX1 = 1;            // INT1设为高优先级
+  33   1          EA  = 1;            // 开启总中断
+  34   1      }
+  35          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     51    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
