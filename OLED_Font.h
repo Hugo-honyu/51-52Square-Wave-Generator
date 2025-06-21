@@ -2,7 +2,7 @@
 #define __OLED_FONT_H
 
 #include "datatype.h"
-/*OLED字模库，宽8像素，高16像素*/
+
 unsigned char code OLED_F8x16[][16]=
 {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,

@@ -1,0 +1,1 @@
+"my_interrupt.c" OPTIMIZE (8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\my_interrupt.lst) OBJECT(.\Objects\my_interrupt.obj)
